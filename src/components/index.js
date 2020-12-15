@@ -1,9 +1,15 @@
-import Author from './Author';
-import Quote from './Quote';
+import AuthorSummary from './quote/AuthorSummary';
 import Header from './Header';
+import Quote from './quote/Quote';
+import QuoteSummary from './quote/QuoteSummary';
+import LoadingScreen from './loading/LoadingScreen';
+import Loader from './loading/Loader'
 
 export {
-    Author,
+    AuthorSummary,
     Header,
-    Quote
+    Loader,
+    LoadingScreen,
+    Quote,
+    QuoteSummary
 }
