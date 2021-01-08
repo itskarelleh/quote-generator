@@ -4,8 +4,6 @@ import useLocalStorage from 'react-hook-uselocalstorage';
 
 export default function Header({ lights, setLightsOn }) {
 
-    // const [ isTouched, setIsTouched ] = useState(false);
-    const [ isTouched, setIsTouched ] = useLocalStorage('left', 'right');
     const [ btnPosition, setBtnPosition ] = useLocalStorage('0px', '20px');
 
     const changeLightMode = () => {

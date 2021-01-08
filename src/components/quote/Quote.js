@@ -8,14 +8,16 @@ export default function Quote (props) {
     const quoteText = document.getElementsByClassName("quote-text");
     const [ characterCount, setCharacterCount ] = useState(null);
 
-    var quoteLength = function() {
-        var count = quoteText[0].innerText.length;
-        return count;
-    }
+    
 
     useEffect(() => {
+        var quoteLength = function() {
+            var count = quoteText[0].innerText.length;
+            return count;
+        }
+
         setCharacterCount(quoteLength);
-    }, [])
+    }, [quoteText])
 
     const QuoteText = styled.h2 `
         font-size: 2.2em;

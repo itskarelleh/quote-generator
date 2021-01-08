@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import { motion } from 'framer-motion';
 import axios from 'axios';
 import { ModalHeading, CloseModal, ModalContainer, List, QuoteContainer, GenreLabel, backgroundLights } from './Styles';
 
@@ -9,7 +7,6 @@ toggleOpen, isOpen }) {
 
     const [ quotes, setQuotes ] = useState([]);
     const [ didMount, setDidMount ] = useState(false);
-    const [ limit, setLimit ] = useState(5);
 
     const handleClick = e => {
         if(isOpen) {
@@ -17,34 +14,19 @@ toggleOpen, isOpen }) {
             toggleOpen();
         }
     }
+    var url = `https://quote-garden.herokuapp.com/api/v3/quotes/random?author=${author}&count=10`;
 
-    function getQuotesByAuthor(l) {
-        var url = `https://quote-garden.herokuapp.com/api/v3/quotes/random?author=${author}&count=${l}`;
-        
+    useEffect(() => {
+        setDidMount(true);
+
         axios.get(url).then((res) => {
             setQuotes(res.data.data);
         }).catch((err) => console.log(err));
 
-        console.log('Quotes loaded');
-    }
-
-    // function increaseLimit(lim) {
-    //     var prevLimit = lim
-    //     setLimit(prevLimit += 10);
-    //     getQuotesByAuthor(prevLimit);
-    //     console.log(prevLimit);
-    //     setModal({ display: 'block'})
-    //     toggleOpen();
-    // }
-
-    useEffect(() => {
-        setDidMount(true);
-        getQuotesByAuthor(limit);
         return () => {
             setDidMount(false);
         }
-    }, [didMount]);
-
+    }, [didMount, url]);
     /* variants */
     const modal_open = {
         open: { 
@@ -114,7 +96,6 @@ toggleOpen, isOpen }) {
                             </>
                         ))}
                     </List>
-                    {/* <button onClick={() => increaseLimit(limit)}>Load more</button> */}
                 </div>
             </ModalContainer>
         </div>

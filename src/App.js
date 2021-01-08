@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useMemo, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import useLocalStorage from 'react-hook-uselocalstorage';
-import { Header, Quote, AuthorSummary, 
-  LoadingScreen, Loader, QuoteOptions, Footer } from './components';
+import { Header, Quote, LoadingScreen, Loader, Footer } from './components';
 import axios from 'axios';
 import { motion } from 'framer-motion';
 
@@ -29,7 +28,7 @@ function App() {
       setLoading(false);
       setRandom(false);
     }
-  }, []);
+  }, [url]);
 
     if(random) {
       setQuote(null);

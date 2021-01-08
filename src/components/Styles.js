@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { motion } from 'framer-motion';
-import { device, size } from './device';
+import { device } from './device';
 
 /* Styed Components */
 export const ModalHeading = styled.div`
