@@ -10,10 +10,14 @@ export default function Loader(props) {
         justify-content: center;
         align-items: center;
     `;
+
+    const LoaderDiv = styled.div`
+        ${props.lights === 'on' ? "color: var(--almost-black)" : "color: var(--lightest)"}
+    `;
     return (
         <LoaderContainer>
-            <div className="loader">Loading</div>
-            <h4>{props.message}</h4>
+            <LoaderDiv className="loader">Loading</LoaderDiv>
+            <h4 className={props.lights === 'on' ?"light-text" : "dark-text"}>{props.message}</h4>
         </LoaderContainer>
     )
 }

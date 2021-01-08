@@ -7,6 +7,7 @@
   --mid-grey: rgb(131, 131, 131);
   --slightly-dark: rgb(53, 53, 53);
   --darkest: #272727;
+  --almost-black: #111111;
   --black: #000;
 }
 
@@ -23,6 +24,7 @@
 
 .light-dim {
   background: var(--lightest);
+  fill: var(--lightest);
 }
 
 .dark {
@@ -33,6 +35,14 @@
 
 .dark-dim {
   background-color: var(--slightly-dark);
+}
+
+.light-fill {
+  fill: var(--darkest);
+}
+
+.dark-fill {
+  fill: var(--lightest);
 }
 
 .light-bg {
@@ -58,6 +68,14 @@
 }
 
 .dark-dim-bg {
+  background: var(--almost-black);
+}
+
+.grey-bg {
+  background: var(--mid-grey);
+}
+
+.black-bg {
   background: var(--black);
 }
 
@@ -112,6 +130,7 @@
 }
 
 
+
 h1 {
   font-family: "Josefin Sans", sans-serif;
   font-size: 2.2em;
@@ -147,7 +166,6 @@ body{
 }
 
 .App {
-  height: 100%;
 }
 
 /* Header.js */
@@ -168,14 +186,9 @@ nav {
   margin-left: 35px;
 }
 
-.button-switch {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  position: relative;
-  border: none;
-  margin-top: -5px;
-  top: 17px;
+.brand h2 {
+  font-size: 18px;
+  font-weight: 900;
 }
 
 .dark-mode {
@@ -187,6 +200,7 @@ nav {
 
 .switch { 
   margin-top: -15px;
+  line-height: 0px;
 }
 
 .switch-bar {
@@ -203,7 +217,10 @@ nav {
 /* Quote.js */
 
 main {
-  height: 75vh;
+  height: 90vh;
+  display: flex;
+  justify-content: space-evenly;
+  flex-flow: column;
 }
 
 .error {
@@ -212,7 +229,7 @@ main {
   padding: 10px;
 }
 .quote {
-  height: 70vh;
+  height: 75%;
   max-width: 70%;
   margin: 0 auto;
   display: flex;
@@ -241,15 +258,20 @@ main {
 }
 
 /* Author Summary */
+.author-summary {
+  height: 25%;
+}
 
 .author-summary .text {
     margin: 0 auto;
     width: 100%;
     display: inline;
+    line-height: 1px;
 }
 
 .author-summary .container {
   width: 50%;
+  height: 100%;
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -268,6 +290,7 @@ main {
   height: 100%;
   justify-content: flex-end;
   top: 0;
+  z-index: 1;
 }
 
 .modal{
@@ -275,12 +298,21 @@ main {
   width: 75%;
   scroll-behavior: smooth;
   overflow-y: scroll;
-  position: relative;
+  position: absolute;
+  z-index: 2;
+}
+
+/* Footer */
+.site-footer {
+    
+}
+
+.site-footer p{
+  text-align: center;
 }
 
 /* Loader */
 .loader {
-  color: #363636;
   font-size: 20px;
   margin: 100px auto;
   width: 1em;
@@ -360,5 +392,98 @@ main {
   }
   87.5% {
     box-shadow: 0em -3em 0 0, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0, -2em -2em 0 0.2em;
+  }
+}
+
+
+/* Media Queries */
+@media screen and (min-width: 320px) and (max-width: 414px) {
+  .App {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+  }
+
+  .quote {
+    height: 95%;
+  }
+
+  .author-summary {
+    height: 15%
+  }
+
+  .author-summary .text {
+    line-height: 5px;
+  }
+
+  nav{
+    height: 10vh;
+  }
+
+  main {
+    height: 85vh;
+  }
+  footer {
+    height: 5vh;
+  }
+} 
+
+@media screen and (max-width: 414px) {
+  body {
+    font-size: 14px;
+    line-height: 18px;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  body {
+    font-size: 10px;
+    line-height: 24px;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  body {
+    font-size: 16px;
+    line-height: 34px;
+  }
+}
+
+@media screen and (max-height: 500px) {
+  main{ 
+    height: 81vh;
+  }
+}
+
+@media screen and (max-width: 224px ) {
+  body{ 
+    font-size: 10px;
+  }
+
+  main {
+    height: 82vh;
+  }
+
+  .author-summary .container {
+      width: 50%;
+      height: 100%;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+  }
+  
+  .quote {
+      height: 85%;
+      max-width: 70%;
+      margin: 0 auto;
+      display: flex;
+      flex-flow: column;
+      align-content: center;
+      justify-content: center;
+  }
+  
+  .author-summary {
+      height: 15%;
   }
 }

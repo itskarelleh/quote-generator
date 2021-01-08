@@ -1,82 +1,62 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { Header, Quote, AuthorSummary, LoadingScreen, Loader } from './components';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
+import useLocalStorage from 'react-hook-uselocalstorage';
+import { Header, Quote, AuthorSummary, 
+  LoadingScreen, Loader, QuoteOptions, Footer } from './components';
 import axios from 'axios';
 import { motion } from 'framer-motion';
 
 function App() {
+  
+  var url = 'https://quote-garden.herokuapp.com/api/v3/quotes/random';
 
   const [ random, setRandom ] = useState(false);
-  const [ lights, setLights ] = useState(false);
+  const [ lights, setLights ] = useLocalStorage('on', 'off');
   const [ loading, setLoading ] = useState(true);
-  const [ quote, setQuote ] = useState([]);
-  const [ error, setError ] = useState('');
-  const [ didMount, setDidMount ] = useState(false);
-  
-  function getARandomQuote() {
-    const url = 'https://quote-garden.herokuapp.com/api/v3/quotes/random';
+  const [ quote, setQuote ] = useState(null); 
+  const [ error, setError ] = useState(null);
 
-    if(quote) {
-      setQuote([]);
-      setRandom(false);
-    }
-
-    axios.get(url).then((res) => {
-      setQuote(res.data.data);
-      setRandom(false);
-      setLoading(false);
-    }).catch((err) => setError(err));
+  function handleRandom() {
+    window.location.reload();
   }
 
   useEffect(() => {
-    setDidMount(true);
-    return () => {
-      setDidMount(false);
-      getARandomQuote();
+    axios.get(url).then((res) => {
+      var quoteRes = res.data.data[0];
+      setQuote(quoteRes);
+    }).catch((err) => setError(err));
+
+    return () => { 
+      setLoading(false);
+      setRandom(false);
     }
-  }, [didMount]);
+  }, []);
 
+    if(random) {
+      setQuote(null);
+      handleRandom();
+    }
 
-  if(loading) {  
-    return <LoadingScreen />;
-  }
-
-  if(random) {
-    console.log('Random = ' + random);
-    console.log('didMount ' + didMount);
-    getARandomQuote();
-  }
-
-  if(!didMount) {
-    console.log('didMount ' + didMount);
-    return null;
-  }
-
-  const QuoteAndAuthor = () => {
-
+    if(loading && !quote){
+      return [
+      (<LoadingScreen />),
+      setLoading(false)]
+    }
+    
     return (
-        <>
-          { quote && quote.map((item) => (
-            <>
-              <Quote text={item.quoteText} lights={lights}/>
-              <AuthorSummary fullname={item.quoteAuthor} 
-              genre={item.quoteGenre}
-              lights={lights} />
-            </>
-          ))}
-        </>
-    )
-  }
-
-  return (
-      <motion.div className={`App ${!lights ? 'light-bg' : 'dark-bg'}`}>
-        <Header setLightsOn={setLights} setRandomized={setRandom} />
+      <motion.div className={`App ${lights === 'on' ? 'light-bg' : 'dark-bg'}`}>
+        <Header lights={lights} setLightsOn={setLights} />
         <main>
-          { error ? <p className={`error ${!lights ? 'error-light' : 'error-dark'}`}>{error}</p> : null }
-          {/* <QuoteAndAuthor /> */}
-          { random ? (<Loader message="Getting new quote" />) : <QuoteAndAuthor /> }
+          { quote ? (
+            <>
+              {error && <p>{error}</p>}
+              <Quote text={quote.quoteText} setRandom={setRandom} 
+              author={quote.quoteAuthor} genre={quote.quoteGenre} lights={lights} />
+            </>
+            ) : (<Loader message="Randomizing" lights={lights} />) }
         </main>
+        <Footer lights={lights} />
       </motion.div>
-  );
+    );
 }
 
 export default App;

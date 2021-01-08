@@ -15,13 +15,13 @@ export default function AuthorSummary(props) {
     }
 
     return(
-        <div className={`author-summary ${!props.lights ? 'light-dim-bg' : 'dark-dim-bg'}`}>
+        <div className={`author-summary ${props.lights === 'on' ? 'light-dim-bg' : 'dark-dim-bg'}`}>
             <div className="container">
                 <div className="text">
-                    <h4 className={`${!props.lights ? 'light-text' : 'dark-text'}`}>{props.fullname}</h4>
-                    <p className={`${!props.lights ? 'light-subtext' : 'dark-subtext'}`}>{props.genre}</p>    
+                    <h4 className={`${props.lights === 'on' ? 'light-text' : 'dark-text'}`}>{props.fullname}</h4>
+                    <p className={`${props.lights === 'on' ? 'light-subtext' : 'dark-subtext'}`}>{props.genre}</p>    
                 </div>
-                <i onClick={toggleModal} class={`fas fa-arrow-right ${!props.lights ? 'light-subtext' : 'dark-subtext'}`}></i>
+                <i onClick={toggleModal} className={`fas fa-arrow-right ${!props.lights ? 'light-subtext' : 'dark-subtext'}`}></i>
                 <Modal 
                 modal={modal} setModal={setModal}
                 animate={ isOpen ? 'open' : 'closed' } lights={props.lights} 
