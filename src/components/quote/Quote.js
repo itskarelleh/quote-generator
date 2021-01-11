@@ -8,8 +8,6 @@ export default function Quote (props) {
     const quoteText = document.getElementsByClassName("quote-text");
     const [ characterCount, setCharacterCount ] = useState(null);
 
-    
-
     useEffect(() => {
         var quoteLength = function() {
             var count = quoteText[0].innerText.length;

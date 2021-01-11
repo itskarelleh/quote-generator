@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Modal from '../Modal';
 import { useCycle } from 'framer-motion';
+import { subTextLights } from '../Styles';
 
 export default function AuthorSummary(props) {
 
@@ -21,7 +22,7 @@ export default function AuthorSummary(props) {
                     <h4 className={`${props.lights === 'on' ? 'light-text' : 'dark-text'}`}>{props.fullname}</h4>
                     <p className={`${props.lights === 'on' ? 'light-subtext' : 'dark-subtext'}`}>{props.genre}</p>    
                 </div>
-                <i onClick={toggleModal} className={`fas fa-arrow-right ${!props.lights ? 'light-subtext' : 'dark-subtext'}`}></i>
+                <i onClick={toggleModal} className={subTextLights(props.lights, 'fas fa-arrow-right')}></i>
                 <Modal 
                 modal={modal} setModal={setModal}
                 animate={ isOpen ? 'open' : 'closed' } lights={props.lights} 

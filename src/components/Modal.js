@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { ModalHeading, CloseModal, ModalContainer, List, QuoteContainer, GenreLabel, backgroundLights } from './Styles';
+import { ModalHeading, CloseModal, ModalContainer, List, QuoteContainer, GenreLabel, backgroundLights, subTextLights, dimBackground } from './Styles';
 
-export default function Modal({ lights, modal, setModal, author,
-toggleOpen, isOpen }) {
+export default function Modal({ lights, modal, 
+    setModal, author, toggleOpen, isOpen }) {
 
     const [ quotes, setQuotes ] = useState([]);
     const [ didMount, setDidMount ] = useState(false);
@@ -78,16 +78,22 @@ toggleOpen, isOpen }) {
             </CloseModal>
             <ModalContainer variants={modal_open}
             animate={isOpen ? 'open' : 'closed'}
-            className={backgroundLights}>
+            className={backgroundLights(lights, "")}>
                 <div className="content">
-                    <ModalHeading className={`${lights === 'on' ? "light-text light-border-bottom" : "dark-text dark-border-bottom" }`}>
+                    <ModalHeading className={`${lights === 'on' ? "light-text" : "dark-text" }`}>
                         <h5>Full list of quotes by</h5>
                         <h1>{author}</h1>
                     </ModalHeading>
                     <List className={`list ${lights === 'on' ? "light-dim-bg" : "dark-dim-bg"}`}>
                         {quotes && quotes.map((quote) => (
                             <>
-                                <QuoteContainer key={quote.id} className={`quote-container ${!lights ? "light-subtext light-bg" : "dark-subtext dark-bg" }`}>
+                                <QuoteContainer key={quote.id} 
+                                className={
+                                    [dimBackground(lights,""),
+                                    subTextLights(lights,"")]
+                                }
+                                // className={`quote-container ${lights ? "light-subtext light-bg" : "dark-subtext dark-bg" }`}
+                                >
                                     {quote.quoteText}
                                     <GenreLabel>
                                         {quote.quoteGenre}                                    
