@@ -288,10 +288,8 @@ main {
 
 .modal{
   height: 100%;
-  width: 75%;
   scroll-behavior: smooth;
   overflow-y: scroll;
-  position: absolute;
   z-index: 2;
 }
 

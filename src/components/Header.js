@@ -5,8 +5,8 @@ import useLocalStorage from 'react-hook-uselocalstorage';
 
 export default function Header({ lights, setLightsOn }) {
     const [ btnPosition, setBtnPosition ] = useLocalStorage('0px', '20px');
-    const [ menuOpen, setMenuOpen ] = useState(false);
     const [ menu, setMenu ] = useState({ display: 'none'});
+    
     const changeLightMode = () => {
         if(btnPosition === '0px') {
             setBtnPosition('20px');
@@ -24,12 +24,6 @@ export default function Header({ lights, setLightsOn }) {
     const closeMenu = () => {
         setMenu({ display: 'none' });
     }
-
-    function toggleMenu() {
-        if(menuOpen) setMenuOpen(false);
-        if(!menuOpen) setMenuOpen(true);
-    }
-
 
     return(
         <nav className={dimBackground(lights, 'site-nav')}>

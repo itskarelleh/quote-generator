@@ -78,20 +78,17 @@ export default function Modal({ lights, modal,
             </CloseModal>
             <ModalContainer variants={modal_open}
             animate={isOpen ? 'open' : 'closed'}
-            className={backgroundLights(lights, "")}>
+            className={`modal ` + backgroundLights(lights)}>
                 <div className="content">
                     <ModalHeading className={`${lights === 'on' ? "light-text" : "dark-text" }`}>
                         <h5>Full list of quotes by</h5>
                         <h1>{author}</h1>
                     </ModalHeading>
-                    <List className={`list ${lights === 'on' ? "light-dim-bg" : "dark-dim-bg"}`}>
+                    <List className={`list`}>
                         {quotes && quotes.map((quote) => (
                             <>
                                 <QuoteContainer key={quote.id} 
-                                className={
-                                    [dimBackground(lights,""),
-                                    subTextLights(lights,"")]
-                                }
+                                className={`quote-container ` + dimBackground(lights) + ` ` + subTextLights(lights)}
                                 // className={`quote-container ${lights ? "light-subtext light-bg" : "dark-subtext dark-bg" }`}
                                 >
                                     {quote.quoteText}

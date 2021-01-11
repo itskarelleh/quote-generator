@@ -154,8 +154,8 @@ export const ToggleButton = styled.i`
     }    
 `;
 
-export const backgroundLights = (lights, classnames) => `${classnames}` + `${lights === 'on' ? "light-bg" : "dark-bg" }`;
-export const dimBackground = (lights, classnames) => `${classnames} ` + `${lights === 'on' ? "light-dim" : "dark-dim" }`;
+export const backgroundLights = (lights) => `${lights === 'on' ? "light-bg" : "dark-bg" }`;
+export const dimBackground = (lights) => `${lights === 'on' ? "light-dim" : "dark-dim" }`;
 export const fillLights = (lights) => `${lights === 'on' ? "var(--darkest)" : "var(--lightest)"}`;
-export const subTextLights = (lights, classnames) => `${classnames} ` + `${lights === 'on' ? 'light-subtext' : 'dark-subtext'}`;
-export const textLights = (lights, classnames) => `${classnames} ` + `${lights === 'on' ? "light-text" : "dark-text" }`;
+export const subTextLights = (lights, classnames) => classnames + ` ${lights === 'on' ? 'light-subtext' : 'dark-subtext'}`;
+export const textLights = (lights, classnames) => classnames + ` ${lights === 'on' ? "light-text" : "dark-text" }`;
