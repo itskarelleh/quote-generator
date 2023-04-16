@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 
 function App() {
   
-  var url = 'https://quote-garden.herokuapp.com/api/v3/quotes/random';
+  var url = ' https://quote-garden.onrender.com/api/v3/quotes/random';
 
   const [ random, setRandom ] = useState(false);
   const [ lights, setLights ] = useLocalStorage('on', 'off');
